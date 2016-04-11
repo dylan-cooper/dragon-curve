@@ -24,7 +24,7 @@ DragonCurve.prototype.getDragonCurve = function(degree) {
 }
 
 /*
- * Dragon Canvas functionality
+ * Dragon Canvas Object
  */
 
 var DragonCanvas = function (canvasID) {
