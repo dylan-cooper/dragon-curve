@@ -36,6 +36,7 @@ var DragonCanvas = function (canvasID, curve) {
   this.nsteps = 15;
   this.isAnimating = false;
   this.scaleFactor = 0.3;
+  this.currentStep = 1;
 }
 
 DragonCanvas.prototype.move = function(direction, position, length) {
@@ -102,9 +103,9 @@ DragonCanvas.prototype.animateDragon = function() {
   
   for (i = 0; i < self.nsteps+1; i+=1){
     setTimeout(function(degree){
-			self.clear();
+            self.clear();
       self.draw(degree);
-      
+      self.currentStep = degree;
       if (degree === self.nsteps) {
         self.isAnimating = false;
       }
