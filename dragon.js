@@ -31,7 +31,7 @@ var DragonCanvas = function (canvasID, curve) {
   this.canvasID = canvasID;
   this.canvas = document.getElementById(this.canvasID);
   this.ctx = this.canvas.getContext('2d');
-  this.color = '#0f0';
+  this.color = '#000';
   this.curve = (curve === undefined) ? new DragonCurve() : curve;
   this.nsteps = 15;
   this.isAnimating = false;
