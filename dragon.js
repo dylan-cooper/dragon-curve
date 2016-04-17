@@ -5,8 +5,8 @@ function reverseAndFlip(arr){
   });
   arr2.reverse();
   return arr2;
-}
 
+}
 /**
  * Dragon Curve Object
  */
@@ -24,17 +24,18 @@ DragonCurve.prototype.getDragonCurve = function(degree) {
 }
 
 /*
- * Dragon Canvas Object
+ * Dragon Canvas functionality
  */
 
-var DragonCanvas = function (canvasID) {
+var DragonCanvas = function (canvasID, curve) {
   this.canvasID = canvasID;
   this.canvas = document.getElementById(this.canvasID);
   this.ctx = this.canvas.getContext('2d');
   this.color = '#0f0';
-  this.curve = new DragonCurve();
-  this.numberAnimations = 15;
+  this.curve = (curve === undefined) ? new DragonCurve() : curve;
+  this.nsteps = 15;
   this.isAnimating = false;
+  this.scaleFactor = 0.3;
 }
 
 DragonCanvas.prototype.move = function(direction, position, length) {
@@ -61,8 +62,8 @@ DragonCanvas.prototype.move = function(direction, position, length) {
 DragonCanvas.prototype.draw = function(degree) {
   var self = this;
   var directions = ['south','southeast','east','northeast','north','northwest','west','southwest'];
-  var pos = [self.canvas.width*13/20, self.canvas.height*7/20],
-      len = Math.pow(0.5,degree/2)*self.canvas.width*0.42,
+  var pos = [self.canvas.width*13/20, self.canvas.height*5/20],
+      len = Math.pow(0.5,degree/2)*self.canvas.width*self.scaleFactor,
       currentDirection = directions[(degree) % 8];
   
   self.ctx.moveTo(pos[0], pos[1]);
@@ -99,12 +100,12 @@ DragonCanvas.prototype.animateDragon = function() {
   }
   self.isAnimating = true;
   
-  for (i = 0; i < self.numberAnimations+1; i+=1){
+  for (i = 0; i < self.nsteps+1; i+=1){
     setTimeout(function(degree){
 			self.clear();
       self.draw(degree);
       
-      if (degree === self.numberAnimations) {
+      if (degree === self.nsteps) {
         self.isAnimating = false;
       }
     }, 500*i, i);
